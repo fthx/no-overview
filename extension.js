@@ -26,7 +26,7 @@ class Extension {
         try {
             Main.layoutManager.startInOverview = false;
         } catch(e) {
-            log("No-Overview extension warning: command not found because not running Ubuntu");
+            log("No-Overview GNOME extension warning: command not found because not running Ubuntu");
         }   
     }
 
@@ -36,7 +36,7 @@ class Extension {
         try {
             Main.layoutManager.startInOverview = true;
         } catch(e) {
-            log("No Overview extension warning: command not found because not running Ubuntu");
+            log("No-Overview GNOME extension warning: command not found because not running Ubuntu");
         }
     }
 }

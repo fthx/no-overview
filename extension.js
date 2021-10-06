@@ -18,25 +18,25 @@ class Extension {
             return;
         }
 
-        // default: new method, fallback: old method
+        Main.sessionMode.hasOverview = false;
+        Main.layoutManager.connect('startup-complete', () => {
+            Main.sessionMode.hasOverview = this._realHasOverview
+        });
+        // handle Ubuntu's method
         try {
             Main.layoutManager.startInOverview = false;
         } catch(e) {
-            log("No-Overview GNOME extension info: alternative method to avoid overview");
-            Main.sessionMode.hasOverview = false;
-            Main.layoutManager.connect('startup-complete', () => {
-                Main.sessionMode.hasOverview = this._realHasOverview
-            });
-        }
+            log("No-Overview GNOME extension info: legacy method");
+        }   
     }
 
     disable() {
-        // default: new method, fallback: old method
+        Main.sessionMode.hasOverview = this._realHasOverview;
+        // handle Ubuntu's method
         try {
             Main.layoutManager.startInOverview = true;
         } catch(e) {
-            log("No-Overview GNOME extension info: alternative method to restore overview");
-            Main.sessionMode.hasOverview = this._realHasOverview;
+            log("No-Overview GNOME extension info: legacy method");
         }
     }
 }
@@ -44,4 +44,3 @@ class Extension {
 function init() {
 	return new Extension();
 }
-

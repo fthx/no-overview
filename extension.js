@@ -23,20 +23,16 @@ class Extension {
             Main.sessionMode.hasOverview = this._realHasOverview
         });
         // handle Ubuntu's method
-        try {
+        if (Main.layoutManager.startInOverview) {
             Main.layoutManager.startInOverview = false;
-        } catch(e) {
-            log("No-Overview GNOME extension info: legacy method");
-        }   
+        }
     }
 
     disable() {
         Main.sessionMode.hasOverview = this._realHasOverview;
         // handle Ubuntu's method
-        try {
+        if (Main.layoutManager.startInOverview) {
             Main.layoutManager.startInOverview = true;
-        } catch(e) {
-            log("No-Overview GNOME extension info: legacy method");
         }
     }
 }

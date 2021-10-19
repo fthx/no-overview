@@ -30,10 +30,6 @@ class Extension {
 
     disable() {
         Main.sessionMode.hasOverview = this._realHasOverview;
-        // handle Ubuntu's method
-        if (Main.layoutManager.startInOverview) {
-            Main.layoutManager.startInOverview = true;
-        }
     }
 }
 

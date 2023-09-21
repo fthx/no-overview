@@ -1,14 +1,14 @@
 /*
   No overview at start-up
+  GNOME Shell 45+ extension
   Contributors: @fthx, @fmuellner
   License: GPL v3
 */
 
 
-const Main = imports.ui.main;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-
-class Extension {
+export default class NoOverviewExtension {
     constructor() {
         this._realHasOverview = Main.sessionMode.hasOverview;
     }
@@ -19,20 +19,14 @@ class Extension {
         }
 
         Main.sessionMode.hasOverview = false;
-        Main.layoutManager.connect('startup-complete', () => {
-            Main.sessionMode.hasOverview = this._realHasOverview
+
+        this._startup_complete = Main.layoutManager.connect('startup-complete', () => {
+            Main.sessionMode.hasOverview = this._realHasOverview;
         });
-        // handle Ubuntu's method
-        if (Main.layoutManager.startInOverview) {
-            Main.layoutManager.startInOverview = false;
-        }
     }
 
     disable() {
         Main.sessionMode.hasOverview = this._realHasOverview;
+        Main.layoutManager.disconnect(this._startup_complete);
     }
-}
-
-function init() {
-	return new Extension();
 }

@@ -3,7 +3,7 @@
   "description": "No overview at start-up. Nothing more.",
   "name": "No overview at start-up",
   "original-authors": ["fthx"],
-  "shell-version": ["45"],
+  "shell-version": ["46"],
   "url": "https://github.com/fthx/no-overview",
   "uuid": "no-overview@fthx",
   "version": 999

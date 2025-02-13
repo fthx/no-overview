@@ -9,15 +9,8 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 export default class NoOverviewExtension {
     enable() {
-        if (!Main.layoutManager._startingUp) {
-            return;
-        }
-
-        Main.layoutManager.connectObject(
-            'startup-complete',
-            () => Main.overview.hide(),
-            this
-        );
+        if (Main.layoutManager._startingUp)
+            Main.layoutManager.connectObject('startup-complete', () => Main.overview.hide(), this);
     }
 
     disable() {
